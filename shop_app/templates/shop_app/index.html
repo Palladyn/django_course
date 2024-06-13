@@ -1,0 +1,16 @@
+{% extends 'shop_app/base.html' %}
+        {% block title%}
+     Title {{ name }}
+        {% endblock %}
+
+        {% block body%}
+ <b> Body {{ name }}</b>
+            {% lorem 3 p random %}
+
+
+            {% for product in products %}
+                <div><b> {{ product }} </b> </div>
+                {% empty %}
+                <div><b> PUSTO </b> </div>
+            {% endfor %}
+        {% endblock %}
