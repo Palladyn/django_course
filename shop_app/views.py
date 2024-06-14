@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from django.shortcuts import render
 from django.http import HttpResponse,HttpRequest
 
@@ -20,3 +21,12 @@ def shop_index(request:HttpRequest):
         'products':products
     }
     return render(request,"shop_app/index.html",context=context)
+
+
+def show_group_list(request:HttpRequest):
+    g=Group.objects.prefetch_related('permissions').all()
+
+    context={
+        "groups":g
+    }
+    return render(request,"shop_app/group_list.html",context=context)

@@ -1,0 +1,25 @@
+{% extends 'shop_app/base.html' %}
+        {% block title%}
+     Groups list
+        {% endblock %}
+
+        {% block body%}
+            <h1>Список Групп</h1>
+            {% for group in groups %}
+               <li>
+               {{ group }}
+                    <ul>
+                       {% for gp in group.permissions.all %}
+                            <li>
+                                {{ gp.name }}
+                                (<code> gp.codename</code>)
+                            </li>
+                       {% endfor %}
+                    </ul>
+               </li>
+
+            {% endfor %}
+
+
+
+        {% endblock %}
