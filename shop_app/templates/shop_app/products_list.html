@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'shop_app/base.html' %}
+        {% block title%}
+     Список Продуктов
+        {% endblock %}
 
-</body>
-</html>
+        {% block body%}
+            <h1>Список Продуктов</h1>
+            {% if products %}
+                {% for product in products %}
+                    <div>
+                        <p>Наименрвание:{{ product.name }}</p>
+                        <p>Цена:{{ product.price }}</p>
+                        <p>Скидка:{% firstof product.discount  'Скидки нет'%}</p>
+                    </div>
+                {% endfor %}
+
+            {% else %}
+
+                (ПУСТО)
+
+            {% endif %}
+
+
+
+
+        {% endblock %}

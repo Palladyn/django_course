@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'shop_app.apps.ShopAppConfig',
+    'requestapp.apps.RequestappConfig',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'requestapp.middlewares.set_useragent_on_req_middleware',
+    # 'requestapp.middlewares.CountRequestsMidlware',
 ]
 
 ROOT_URLCONF = 'obuchalka.urls'
