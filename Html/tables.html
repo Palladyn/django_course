@@ -1,10 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Tables</title>
+    <style>
+
+        .p-list{
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+
+        .p-list td, .p-list th{
+            border: 1px solid gray;
+            padding: 5px;
+        }
+
+        .p-list_n{
+            margin-top: 15px;
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+
+        .p-list_n td, .p-list_n th{
+            border: 1px solid gray;
+            padding: 5px;
+        }
+         .p-list_n thead{
+             background-color: lightblue;
+         }
+        .p-list_n tfoot{
+             background-color: lightgreen;
+            font-weight: bold;
+         }
+
+    </style>
 </head>
 <body>
-$END$
+<table class="p-list">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    <tr>
+        <td>AAAAAAAA</td>
+        <td>100000</td>
+    </tr>
+
+    <tr>
+        <td>BBBBBBBBB</td>
+        <td>2000000</td>
+    </tr>
+
+    <tr>
+        <td>CCCCCCCCCC</td>
+        <td>3000000000</td>
+    </tr>
+
+    <tr>
+        <td>DDDDDDDDD</td>
+        <td >40000000</td>
+    </tr>
+    <tr>
+        <td>EEEEEEEEEEE</td>
+        <td>500000000000</td>
+    </tr>
+</table>
+
+
+<div class="tst">
+    <table class="p-list_n">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>AAAAAAAA</td>
+                <td>100000</td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>BBBBBBBBB</td>
+                <td>2000000</td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td>CCCCCCCCCC</td>
+                <td>3000000000</td>
+            </tr>
+
+            <tr>
+                <td>4</td>
+                <td>DDDDDDDDD</td>
+                <td rowspan="2">40000000</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>EEEEEEEEEEE</td>
+
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+
+                <td colspan="2">Итого</td>
+                <td>99999999999999999999</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
 </body>
 </html>

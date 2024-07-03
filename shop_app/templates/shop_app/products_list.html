@@ -8,7 +8,8 @@
             {% if products %}
                 {% for product in products %}
                     <div>
-                        <p>Наименрвание:{{ product.name }}</p>
+                        <p><a href="{% url "shop_app:prod_det" product.pk  %}"> Наименрвание: {{ product.name }}</a> </p>
+                        <p><a href="{% url "shop_app:prod_det_pw" product.pk  %}"> Наименрвание: {{ product.name }}</a> </p>
                         <p>Цена:{{ product.price }}</p>
                         <p>Скидка:{% firstof product.discount  'Скидки нет'%}</p>
                     </div>
@@ -19,7 +20,9 @@
                 (ПУСТО)
 
             {% endif %}
-
+        <div>
+        <a href="{% url 'shop_app:create_product' %}"> Создать продукт </a>
+        </div>
 
 
 

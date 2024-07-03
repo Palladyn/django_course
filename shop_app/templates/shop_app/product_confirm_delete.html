@@ -1,0 +1,26 @@
+{#product_form_tmplate#}
+{% extends 'shop_app/base.html' %}
+{% block title%}
+
+    Удалить Продукт
+
+{% endblock %}
+
+{% block body%}
+    <h1> Удаление продукта {{ object.name }}</h1>
+    <br>
+    <div>
+        <a href="{% url 'shop_app:prod_det' object.pk %}"> Назад </a>
+    </div>
+    <br>
+
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit"> Удалить </button>
+            </form>
+        </div>
+
+
+{% endblock %}

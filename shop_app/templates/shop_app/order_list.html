@@ -5,8 +5,8 @@
 
         {% block body%}
             <h1>Список Заказов</h1>
-            {% if orders %}
-                {% for order in orders %}
+            {% if object_list %}
+                {% for order in object_list %}
                     <div>
                         <p>Адрес Доставки: {{ order.delivery_adress }}</p>
                         <p>Промокод: {% firstof order.promocode  'Скидки нет'%} </p>
@@ -17,6 +17,7 @@
                                     <li>{{ prod.name }} - {{ prod.price }}$ </li>
                                 {% endfor %}
                             </ul>
+                    <a href="{% url 'shop_app:order_dw' order.pk %}">Подробнее</a>
 
                     </div>
                 {% endfor %}

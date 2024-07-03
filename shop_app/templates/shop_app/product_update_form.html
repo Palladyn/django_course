@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{#product_form_tmplate#}
+{% extends 'shop_app/base.html' %}
+{% block title%}
+
+    Править Продукт
+
+{% endblock %}
+
+{% block body%}
+    <h1> Правка продукта </h1>
+    <div>
+                {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <strong>{{ error|escape }}</strong>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit"> Править </button>
+        </form>
+    </div>
+
+        <div>
+        <a href="{% url 'shop_app:prod_det' object.pk %}"> Назад </a>
+        </div>
+
+
+{% endblock %}

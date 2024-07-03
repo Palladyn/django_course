@@ -1,10 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Forms</title>
+    <style>
+        .r-form{
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .r-form > div{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+                  }
+        .r-form__input {
+            width: 50%;
+        }
+        .r-form textarea{
+            height: 150px;
+        }
+
+    </style>
 </head>
 <body>
-$END$
+    <form class="r-form" method="post ">
+        <h1>Регистрация</h1>
+        <div>
+            <label for="name"> ФИО: </label>
+            <input type="text" id="name" name="name" class="r-form__input">
+        </div>
+        <div>
+            <label for="email"> Email: </label>
+            <input type="email" id="email" name="email" class="r-form__input">
+        </div>
+        <div>
+            <label> Укажите свой пол: </label>
+            <div>
+                <label><input type="radio" name="sex" value="male"> Мужской</label>
+                <label><input type="radio" name="sex" value="female"> Женский</label>
+            </div>
+        </div>
+        <div>
+            <label>Время</label>
+            <div>
+                <label><input type="checkbox" name="time_u" value="1"> Утро</label>
+                <label><input type="checkbox" name="time_d" value="2"> День</label>
+                <label><input type="checkbox" name="time_v" value="3"> Вечер</label>
+            </div>
+        </div>
+        <div>
+            <label>Тема</label>
+            <select name="section" class="r-form__input">
+                <option value="1"> Тема 1</option>
+                <option value="2">Тема 2</option>
+                <option value="3">Тема 3</option>
+
+            </select>
+        </div>
+        <div>
+            <label>Тезисы</label>
+            <textarea name="info" class="r-form__input"></textarea>
+        </div>
+        <div>
+            <label>Презентация</label>
+            <input type="file" name="file">
+        </div>
+        <div>
+            <input type="reset" value="Очистить">
+            <input type="submit" value="Отправить">
+        </div>
+
+
+
+    </form>
 </body>
 </html>

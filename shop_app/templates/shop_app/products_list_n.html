@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'shop_app/base.html' %}
+        {% block title%}
+     Список Продуктов
+        {% endblock %}
+
+        {% block body%}
+            <h1>Список Продуктов</h1>
+            {% if products %}
+                {% for product in products %}
+                    <div>
+                        <p>Наименрвание: <a href="{% url "shop_app:prod_det" product.pk  %}"> {{ product.name }}</a> </p>
+                         <p><b> DW </b><a href="{% url "shop_app:prod_det_pw" product.pk  %}"> Наименрвание: {{ product.name }}</a> </p>
+                        <p>Цена:{{ product.price }}</p>
+                        <p>Скидка:{% firstof product.discount  'Скидки нет'%}</p>
+{#                        <p> <a href="{% url "shop_app:update_product_n" product.pk  %}"> Править </a> </p>#}
+                    </div>
+                {% endfor %}
+
+            {% else %}
+
+                (ПУСТО)
+
+            {% endif %}
+        <div>
+        <p><a href="{% url 'shop_app:create_product' %}"> Создать продукт </a></p>
+        <p><a href="{% url 'shop_app:create_product_n' %}"> Создать продукт NEW</a> </p>
+        </div>
+
+
+
+        {% endblock %}

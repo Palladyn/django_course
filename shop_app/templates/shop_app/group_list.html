@@ -5,6 +5,14 @@
 
         {% block body%}
             <h1>Список Групп</h1>
+            <div>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit"> Добавить</button>
+
+                </form>
+            </div>
             {% for group in groups %}
                <li>
                {{ group }}
