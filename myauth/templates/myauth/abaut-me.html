@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'myauth/base_auth.html' %}
+{% block title %}
+    Про меня
+{% endblock %}
+
+{% block body %}
+    <h1> О Пользователе</h1>
+    {% if user.is_authenticated %}
+        <h2>Подробнее:</h2>
+        <p> Логин: {{ user.username }} </p>
+        <p> Имя: {{ user.first_name }}</p>
+        <p> Фамилия: {{ user.last_name }}</p>
+        <p> Мейл: {{ user.email }}</p>
+        <p></p>
+    {% else %}
+        <h2> Пользователь не авторезирован</h2>
+    {% endif %}
+{% endblock %}

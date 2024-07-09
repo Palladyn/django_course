@@ -1,10 +1,11 @@
+from django.contrib.auth.decorators import login_required,permission_required,user_passes_test
 from django.contrib.auth.models import Group
 from django.shortcuts import render,redirect,reverse,get_object_or_404
-from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
+from django.http import  HttpRequest, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView,ListView,DetailView,CreateView,UpdateView,DeleteView
-
+from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin,UserPassesTestMixin
 from shop_app.forms import ProductForms,GroupForm
 from shop_app.models import Product, Order
 
@@ -71,7 +72,7 @@ class GListV(View):
         # return self.get(request)
 
 
-
+@permission_required("shop_app.view_product",raise_exception=True)
 def products_list(request:HttpRequest):
     products=Product.objects.all()
     context={
@@ -124,7 +125,7 @@ class ProductLDV(DetailView):
     context_object_name = "product"
 
 
-
+@login_required
 def order_list(request:HttpRequest):
     orders=Order.objects.select_related("user").prefetch_related("products").all()
     context={
@@ -132,18 +133,20 @@ def order_list(request:HttpRequest):
     }
     return render(request, "shop_app/order_list_ols.html", context=context)
 
-class OrderLW(ListView):
+class OrderLW(LoginRequiredMixin,ListView):
     # template_name = "shop_app/order_list.html"
     queryset = Order.objects.select_related("user").prefetch_related("products")
     # model = Order
     # context_object_name = "orders"
 
-class OrderDW(DetailView):
+class OrderDW(PermissionRequiredMixin,DetailView):
+    permission_required = "shop_app.view_order"
     queryset = Order.objects.select_related("user").prefetch_related("products")
 
 
 
 
+@user_passes_test(lambda self: True if self.request.user.username == "gena" else False,)
 def create_new_product(request:HttpRequest):
     if request.method=="POST":
         form = ProductForms(request.POST)
@@ -163,6 +166,16 @@ def create_new_product(request:HttpRequest):
 
     return render(request, "shop_app/product_form_tmplate.html", context=context)
 
+# class CreateProdV(UserPassesTestMixin,CreateView):
+#     def test_func(self):
+#         if self.request.user.username=="gena":
+#             return True
+#         return False
+#
+#     model = Product
+#     fields = "name","description","price","discount"
+#     success_url = reverse_lazy('shop_app:product_list_lw')
+#
 class CreateProdV(CreateView):
     model = Product
     fields = "name","description","price","discount"
