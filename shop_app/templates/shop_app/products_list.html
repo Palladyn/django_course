@@ -12,6 +12,11 @@
                         <p><a href="{% url "shop_app:prod_det_pw" product.pk  %}"> Наименрвание: {{ product.name }}</a> </p>
                         <p>Цена:{{ product.price }}</p>
                         <p>Скидка:{% firstof product.discount  'Скидки нет'%}</p>
+
+                        {% if product.preview %}
+                            <img src="{{ product.preview.url }}" alt="{{ product.preview.name }}">
+
+                        {% endif %}
                     </div>
                 {% endfor %}
 
@@ -22,6 +27,7 @@
             {% endif %}
         <div>
         <a href="{% url 'shop_app:create_product' %}"> Создать продукт </a>
+         <p><a href="{% url 'shop_app:create_product_n' %}"> Создать продукт NEW</a> </p>
         </div>
 
 

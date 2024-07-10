@@ -6,8 +6,8 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView,ListView,DetailView,CreateView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin,UserPassesTestMixin
-from shop_app.forms import ProductForms,GroupForm
-from shop_app.models import Product, Order
+from shop_app.forms import ProductForms,GroupForm,ProductFormN
+from shop_app.models import Product, Order,ProductImage
 
 
 # Create your views here.
@@ -120,7 +120,8 @@ class ProductDetV(View):
 
 class ProductLDV(DetailView):
     template_name = "shop_app/det_prod.html"
-    model = Product
+    # model = Product
+    queryset = Product.objects.prefetch_related("images")
     pk_url_kwarg ="pk"
     context_object_name = "product"
 
@@ -146,7 +147,7 @@ class OrderDW(PermissionRequiredMixin,DetailView):
 
 
 
-@user_passes_test(lambda self: True if self.request.user.username == "gena" else False,)
+# @user_passes_test(lambda self: True if self.request.user.username == "gena" else False,)
 def create_new_product(request:HttpRequest):
     if request.method=="POST":
         form = ProductForms(request.POST)
@@ -178,19 +179,32 @@ def create_new_product(request:HttpRequest):
 #
 class CreateProdV(CreateView):
     model = Product
-    fields = "name","description","price","discount"
+    form_class = ProductFormN
+    # fields = "name","description","price","discount","preview"
     success_url = reverse_lazy('shop_app:product_list_lw')
+
+    def form_valid(self, form):
+        responce=super(UpdeateProdV,self).form_valid(form)
+        for img in form.files.getlist("images"):
+            ProductImage.objects.create(product=self.object,image=img)
+        return responce
 
 
 class UpdeateProdV(UpdateView):
     model = Product
-    fields = "name","description","price","discount"
+    form_class = ProductFormN
+    # fields = "name","description","price","discount","preview"
     # success_url = reverse_lazy('shop_app:product_list_lw')
     template_name_suffix = "_update_form"
 
     def get_success_url(self):
         return reverse('shop_app:prod_det',kwargs={"pk":self.object.pk} )
 
+    def form_valid(self, form):
+        responce=super(UpdeateProdV,self).form_valid(form)
+        for img in form.files.getlist("images"):
+            ProductImage.objects.create(product=self.object,image=img)
+        return responce
 
 class ProdDelV(DeleteView):
     model = Product

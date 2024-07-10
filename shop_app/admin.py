@@ -3,12 +3,15 @@ from django.http import HttpRequest
 from django.db.models import QuerySet
 
 from .admin_mixin import ExportAsCSVMixin
-from  .models import Product,Order
+from  .models import Product,Order,ProductImage
 
 # Register your models here.
 
 class OrderInline(admin.TabularInline):
     model = Product.orders.through
+
+class ProductInline(admin.StackedInline):
+    model=ProductImage
 
 @admin.action(description="Архивировать")
 def mark_arhived(modeladmin:admin.ModelAdmin,request:HttpRequest,queryset:QuerySet):
@@ -27,7 +30,8 @@ class ProductAdmin(admin.ModelAdmin,ExportAsCSVMixin):
         "export_csv",
     ]
     inlines = [
-        OrderInline
+        OrderInline,
+        ProductInline,
     ]
     list_display = ['name','description_short','price','discount','created_at','arhive']
     list_display_links = ['name',]
@@ -40,6 +44,9 @@ class ProductAdmin(admin.ModelAdmin,ExportAsCSVMixin):
     ("Price options",{
             "fields":("price","discount"),
             "classes":("collapse",),
+        }),
+    ("Images ",{
+            "fields":("preview",),
         }),
     ("Extra options",{
             "fields":("arhive",),

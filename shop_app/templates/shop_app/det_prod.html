@@ -15,6 +15,24 @@
             <div>
                 Discount: {{ product.discount }}
             </div>
+            <div>
+                {% if product.preview %}
+                    <img src="{{ product.preview.url }}" alt="{{ product.preview.name }}">
+                {% endif %}
+            </div>
+              <div>
+              <h3>Images:</h3>
+                  {% for img in product.images.all %}
+                      <div>
+                        <img src="{{img.image.url}}" alt="{{ img.image.name }}">
+                      <div>{{ img.descriptions }}</div>
+                      </div>
+                    {% empty %}
+                      <h3> Нет картинок</h3>
+                  {% endfor %}
+
+            </div>
+
             <div>  <p> <a href="{% url "shop_app:update_product_n" product.pk  %}"> Править </a> </p> </div>
             <div>  <p> <a href="{% url "shop_app:delete_product_n" product.pk  %}"> Удалить </a> </p> </div>
             <div>
