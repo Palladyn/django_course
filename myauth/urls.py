@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib.auth.views import LoginView
 
 from myauth.views import user_login_v1,set_cookie_view,get_cookie_view,set_session_v,get_session_v,logout_user,\
-    MyLogout,AbautMeV,RegUser,FromTest
+    MyLogout,AbautMeV,RegUser,FromTest,HelloView,HelloView1,HelloView2
 
 
 app_name="myauth"
@@ -29,6 +29,12 @@ path('abaut_me/',AbautMeV.as_view(), name='abaut_me'),
 path('reg_usr/',RegUser.as_view(), name='reg_usr'),
 
 path('tst_json/',FromTest.as_view(), name='tst_json'),
+
+path('hello_v/',HelloView.as_view(), name='hello_view'),
+path('hello_v1/',HelloView1.as_view(), name='hello_view1'),
+path('hello_v2/',HelloView2.as_view(), name='hello_view2'),
+
+
 
 
     ]

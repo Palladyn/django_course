@@ -13,6 +13,7 @@ from conf.conf import *
 from pathlib import Path
 import os
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     # 'requestapp.middlewares.set_useragent_on_req_middleware',
     # 'requestapp.middlewares.CountRequestsMidlware',
 ]
@@ -119,10 +121,11 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'ru'
 
 LANGUAGES = [
-    ('ru', 'Russian'),
-    ('ua', 'Ukrainian'),
-    ('en', 'English')
+    ('ru', _('Russian')),
+    ('ua', _('Ukrainian')),
+    ('en', _('English'))
 ]
+
 
 TIME_ZONE = 'Europe/Kiev'
 
@@ -130,6 +133,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+USE_L10N=True
+
+LOCALE_PATHS=[
+    BASE_DIR/'locale'
+]
 
 
 # Static files (CSS, JavaScript, Images)

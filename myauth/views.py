@@ -7,6 +7,8 @@ from django.urls import reverse,reverse_lazy
 from django.contrib.auth.views import LogoutView
 from django.views import View
 from django.views.generic import TemplateView,CreateView
+# from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as __,gettext as _, ngettext
 
 # Create your views here.
 class AbautMeV(TemplateView):
@@ -71,3 +73,28 @@ class MyLogout(LogoutView):
 class FromTest(View):
     def get(self, request)->JsonResponse:
         return JsonResponse({"foo":"bar","spam":"eggs"})
+
+
+class HelloView(View):
+    def get(self,request:HttpRequest)->HttpResponse:
+        w_m=_("Hello world!!!")
+        return HttpResponse(f"<h1>{w_m}</h1>")
+
+class HelloView1(View):
+    w_m = _("Hello world!!!")
+    def get(self,request:HttpRequest)->HttpResponse:
+        return HttpResponse(f"<h1>{self.w_m}</h1>")
+
+class HelloView2(View):
+    w_m = _("Hello world!!!")
+    def get(self,request:HttpRequest)->HttpResponse:
+        item_str=request.GET.get("items") or 0
+        items=int(item_str)
+        products_l=ngettext(
+            "one prod",
+            "{count} prods",
+            items,
+        )
+        prod_l=products_l.format(count=items)
+        return HttpResponse(f"<h1>{self.w_m}</h1>"
+                            f"<h2>{prod_l}</h2>")

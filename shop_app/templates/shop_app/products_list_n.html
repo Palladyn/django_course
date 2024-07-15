@@ -1,14 +1,15 @@
 {% extends 'shop_app/base.html' %}
+{% load i18n %}
         {% block title%}
-     Список Продуктов
+     {% translate 'Product list title' %}
         {% endblock %}
 
         {% block body%}
-            <h1>Список Продуктов</h1>
+            <h1> {% translate 'Product list h1' %}</h1>
             {% if products %}
                 {% for product in products %}
                     <div>
-                        <p>Наименрвание: <a href="{% url "shop_app:prod_det" product.pk  %}"> {{ product.name }}</a> </p>
+                        <p>Наименрвание: <a href="{% url "shop_app:prod_det" product.pk  %}"> {% translate 'name' context 'product.name' %}{{ product.name }}</a> </p>
                          <p><b> DW </b><a href="{% url "shop_app:prod_det_pw" product.pk  %}"> Наименрвание: {{ product.name }}</a> </p>
                         <p>Цена:{{ product.price }}</p>
                         <p>Скидка:{% firstof product.discount  'Скидки нет'%}</p>
