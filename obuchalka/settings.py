@@ -40,10 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'django_filters',
 
     'shop_app.apps.ShopAppConfig',
     'requestapp.apps.RequestappConfig',
     'myauth.apps.MyauthConfig',
+    'my_api_app.apps.MyApiAppConfig'
 
 ]
 
@@ -160,3 +163,9 @@ MEDIA_ROOT=BASE_DIR / 'uploads'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL=reverse_lazy('myauth:abaut_me')
 
+REST_FRAMEWORK={
+    "DEFAULT_PAGINATION_CLASS":"rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE":10,
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+
+}
