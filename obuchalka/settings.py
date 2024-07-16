@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
+    'django.contrib.admindocs',
 
     'shop_app.apps.ShopAppConfig',
     'requestapp.apps.RequestappConfig',
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'django.contrib.admindocs.middleware.XViewMiddleware'
     # 'requestapp.middlewares.set_useragent_on_req_middleware',
     # 'requestapp.middlewares.CountRequestsMidlware',
 ]

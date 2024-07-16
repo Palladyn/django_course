@@ -45,6 +45,9 @@ class GroupsListViewSLM(ListCreateAPIView):
 
 
 class ProdViewSet(ModelViewSet):
+    """
+    Набор для действий над продуктами
+    """
     queryset = Product.objects.all()
     serializer_class=ProductSerializer
     filter_backends = [

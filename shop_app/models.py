@@ -7,6 +7,10 @@ def prod_prew_dir_path(instance:"Product",filename:str)->str:
     return f"products/prod_{instance.pk}/prev/{filename}"
 
 class Product(models.Model):
+    """
+    В Модели содержатся товары для продажи
+    Заказы тут: :model:`shop_app.Order`
+    """
     class Meta:
         ordering=["name"]
         # db_table="tech_products"
